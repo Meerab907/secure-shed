@@ -1,0 +1,392 @@
+ 🔐 Secure Shed — Secure Reminder & Meeting Manager
+
+Secure Shed is a Flutter-based mobile application designed to combine **task and meeting management with user authentication, identity verification, and additional security features**.
+
+The application allows users to securely register and manage their accounts, complete an identity-verification process, configure security options, create and manage tasks, view scheduled tasks through a calendar, and receive local task reminders.
+
+✨ Features
+
+🔑 Authentication
+
+* User registration
+* User login
+* Logout
+* Forgot password
+* Password reset using Firebase Authentication
+
+🪪 Identity Verification
+
+* Personal information collection
+* Address details
+* Contact information
+* Employment information
+* Selfie capture
+* CNIC front and back image capture
+* Five-step identity-verification flow
+
+🛡️ Security
+
+* 6-digit PIN setup
+* Face setup
+* Fingerprint setup/simulation
+* Local security preferences
+* PIN hashing using SHA-256
+
+> Note: Face and fingerprint functionality in the current version is implemented as a setup/simulation rather than real biometric authentication.
+
+ 📝 Task Management
+
+* Create tasks
+* View tasks
+* Edit tasks
+* Reschedule tasks
+* Delete tasks
+* Update task status
+* Task categories
+* Task priority
+* Task location and notes
+* Today's tasks
+* Task retrieval by date/category
+
+⚠️ Task Conflict Detection
+
+Secure Shed checks scheduled tasks for overlapping times.
+
+When a new task is created, its start and end times are compared with existing tasks on the same date. If an overlap is detected, the user is informed about the time conflict before saving the task.
+
+📅 Calendar
+
+* Calendar-based task viewing
+* Tasks displayed according to date
+* Priority-based visual indicators
+* Selected-day task list
+* Task status indicators
+
+ 🔔 Local Notifications
+
+* Schedule task reminders
+* Scheduled notifications using Flutter Local Notifications
+* Time-zone-aware scheduling
+* High-priority Android notifications
+
+👤 Profile
+
+* User information
+* Task statistics
+* Profile management
+
+⚙️ Settings
+
+* Application settings
+* Security preferences
+* Profile-related options
+
+
+
+🛠️ Technologies Used
+
+| Technology                      | Purpose                                       |
+| ------------------------------- | --------------------------------------------- |
+| **Flutter**                     | Cross-platform mobile application development |
+| **Dart**                        | Application programming                       |
+| **Firebase Authentication**     | User registration, login and password reset   |
+| **Cloud Firestore**             | Cloud database                                |
+| **Shared Preferences**          | Local storage                                 |
+| **Flutter Local Notifications** | Local task reminders                          |
+| **Table Calendar**              | Calendar interface                            |
+| **Image Picker**                | Camera/image capture                          |
+| **Path Provider**               | Local file storage                            |
+| **Crypto**                      | SHA-256 PIN hashing                           |
+| **UUID**                        | Unique task IDs                               |
+| **Visual Studio Code**          | Development environment                       |
+
+
+
+ 🏗️ Architecture
+
+The application follows a layered structure:
+
+
+Presentation Layer
+        ↓
+Business Logic / Services
+        ↓
+Firebase + Local Storage
+
+
+Presentation Layer
+
+The application contains screens for:
+
+* Loading
+* Get Started
+* Introduction
+* Login
+* Signup
+* Forgot Password
+* Password Reset
+* Identity Verification
+* Security Setup
+* Home
+* Task Creation
+* Task Display
+* Rescheduling
+* Calendar
+* Today's Tasks
+* Profile
+* Settings
+
+ Business Logic Layer
+
+Main services include:
+
+* `AuthService`
+* `TaskService`
+* `IdentityService`
+* `NotificationService`
+* `ImageService`
+* `LocalSecurityStorage`
+
+Data Layer
+
+The application uses:
+
+* Firebase Authentication
+* Cloud Firestore
+* Shared Preferences
+* Local file storage
+
+ 🗄️ Firestore Collections
+
+Users
+
+Stores user account and security-related information.
+
+Example fields:
+
+
+uid
+username
+email
+pinHash
+pinEnabled
+biometricEnabled
+Tasks
+
+Stores user-created tasks.
+
+Example fields:
+
+
+taskId
+userId
+title
+description
+category
+location
+date
+startTime
+endTime
+notes
+priority
+status
+createdAt
+updatedAt
+
+Identity Verification
+
+Stores identity-verification information.
+
+Example fields:
+
+userId
+fullName
+cnic
+phone
+address
+jobTitle
+selfieImagePath
+cnicFrontPath
+cnicBackPath
+createdAt
+
+
+📱 Application Flow
+
+Loading Screen
+      ↓
+Get Started
+      ↓
+Introduction
+      ↓
+Login / Signup
+      ↓
+Identity Verification
+      ↓
+Security Setup
+   ↙    ↓     ↘
+Face  Fingerprint  PIN
+      ↓
+Home Dashboard
+   ↙    ↓     ↘
+Tasks  Calendar  Profile
+      ↓
+Settings
+
+📂 Project Structure
+
+A simplified structure of the project:
+
+lib/
+│
+├── main.dart
+├── firebase_options.dart
+│
+├── models/
+│   ├── user_model.dart
+│   ├── task_model.dart
+│   └── identity_model.dart
+│
+├── services/
+│   ├── auth_service.dart
+│   ├── task_service.dart
+│   ├── identity_service.dart
+│   ├── notification_service.dart
+│   ├── image_service.dart
+│   └── local_security_service.dart
+│
+├── screens/
+│   ├── authentication/
+│   ├── identity/
+│   ├── security/
+│   ├── tasks/
+│   ├── calendar/
+│   ├── profile/
+│   └── settings/
+│
+└── utils/
+    ├── app_theme.dart
+    ├── routes.dart
+    ├── hash_helper.dart
+    └── status_helper.dart
+
+ 🚀 Getting Started
+
+ Prerequisites
+
+Make sure you have installed:
+
+* Flutter SDK
+* Dart SDK
+* Android Studio or another Android development environment
+* Visual Studio Code or Android Studio
+* A Firebase project
+
+ Installation
+
+Clone the repository:
+
+
+git clone https://github.com/MahnoorNaseer/secure_shed.git
+
+Move into the project directory:
+
+
+cd secure_shed
+
+
+Install dependencies:
+
+flutter pub get
+
+
+Run the application:
+
+flutter run
+
+
+ Firebase Configuration
+
+The application uses Firebase Authentication and Cloud Firestore.
+
+For a new Firebase project, configure Firebase for the required Flutter platforms using FlutterFire CLI and generate the appropriate `firebase_options.dart` file.
+
+> Do not commit private credentials, service-account files, or other sensitive Firebase configuration to a public repository.
+
+
+
+🧩 Current Project Status
+
+ ✅ Completed
+
+* User registration and login
+* Password reset
+* Firebase Authentication
+* Identity verification flow
+* Selfie/CNIC capture
+* PIN setup
+* Face setup
+* Fingerprint setup/simulation
+* Task creation
+* Task editing
+* Task rescheduling
+* Task deletion
+* Task status management
+* Task conflict detection
+* Calendar
+* Today's tasks
+* Firestore integration
+* Local security storage
+* Local task notifications
+
+ 🚧 Partially Completed
+
+* Calendar enhancements
+* Today's task UI improvements
+* Task statistics/charts
+* Real biometric authentication
+
+🔮 Future Enhancements
+
+* Real biometric authentication using `local_auth`
+* Recurring reminders
+* Smart reminder suggestions
+* Push notifications
+* Search and filtering
+* Dark mode
+* Advanced profile charts
+* Google Calendar synchronization
+
+
+
+ 🧠 Challenges Addressed
+
+During development, several technical challenges were encountered, including:
+
+* Firebase configuration
+* Route management
+* Multi-step form validation
+* Camera integration
+* Image storage and retrieval
+* Firestore data conversion
+* Task conflict detection
+* State management across screens
+
+These issues were addressed through debugging and iterative testing.
+
+
+ 👥 Contributors
+
+**Mahnoor Naseer**
+**Meerab Aijaz**
+
+The project was developed as part of the **Mobile Application Development** course at Bahria University Islamabad Campus.
+
+📚 References
+
+* Flutter Documentation
+* Firebase Documentation
+* Dart Documentation
+* Material Design Guidelines
+* Table Calendar package documentation
+* Flutter Local Notifications package documentation
